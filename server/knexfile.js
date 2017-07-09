@@ -4,11 +4,11 @@ module.exports = {
       directory: __dirname + '/database_knex/migrations'
     },
     seeds: {
-      directory: __dirname + '/database_knex/seeds/'
+      directory: __dirname + '/database_knex/seeds/development'
     },
     client: 'pg',
     connection: {
-      database: 'ctrl-grp'
+      database: 'ctrl-grp-dev'
     }
   },
   test: {

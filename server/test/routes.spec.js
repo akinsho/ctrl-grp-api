@@ -44,4 +44,16 @@ describe('API Routes', () => {
       });
     });
   });
+  describe('GET /api/v1/users/:firstname', () => {
+    it('should return a single user', done => {
+      chai.request(server).get('/api/v1/users/:firstname').end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.name.should.equal('akin');
+        res.body.should.have.property('surname');
+        done();
+      });
+    });
+  });
 });

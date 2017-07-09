@@ -2,29 +2,30 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('users', table => {
       table.increments('id').primary();
-      table.string('firstname').notNull();
-      table.string('surname').notNull();
+      table.string('firstname', 20).notNull();
+      table.string('surname', 50).notNull();
       table.date('start_date').notNull();
     }),
     knex.schema.createTable('medication_history', table => {
+      table.integer('patient_id').unsigned();
+      table.foreign('patient_id').references('id').inTable('users');
       table.increments('id').primary();
-      table.integer('patient_id').references('id').inTable('users');
       table.string('medication').notNull();
       table.date('day_started').notNull();
       table.date('day_changed');
       table.date('dosage_changed');
     }),
     knex.schema.createTable('evening_check', table => {
+      table.integer('patient_id').unsigned().references('id').inTable('users');
       table.increments('id').primary();
-      table.integer('patient_id').references('id').inTable('users');
       table.date('date_of_check');
       table.integer('wellbeing');
       table.boolean('medication_taken');
       table.string('survey_responses');
     }),
     knex.schema.createTable('two_weekly_check', table => {
+      table.integer('patient_id').unsigned().references('id').inTable('users');
       table.increments('id').primary();
-      table.integer('patient_id').references('id').inTable('users');
       table.date('date_of_survey').notNull();
       table.string('nine_question_survey');
       table.string('five_question_survey');
