@@ -6,7 +6,9 @@ module.exports = {
     seeds: {
       directory: __dirname + '/database_knex/seeds/'
     },
-    client: 'postgresql',
-    connection: 'postgres://A_nonymous@localhost/ctrl-grp'
+    client: 'pg',
+    connection: {
+      database: 'ctrl-grp'
+    }
   }
 };
