@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import db from './db';
+
+console.log('db', db);
 
 const app = express();
 const port = process.env.PORT || 4001;

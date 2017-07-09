@@ -4,6 +4,7 @@
 --check is related to the specific user
 --TODO Ideally build DB with an ORM so that build is not dependent on the type
 --of database
+
 BEGIN;
 
   DROP TABLE IF EXISTS users, medication_history, evening_check, two_weekly_check CASCADE;
@@ -42,19 +43,19 @@ BEGIN;
   );
 
   INSERT INTO users (firstname, surname, start_date) VALUES (
-    'akin', 'sowemimo', '20/07/2015'
+    'akin', 'sowemimo', '2015/07/20'
   );
 
   INSERT INTO medication_history (patient_id, medication, day_started, dosage_change) VALUES (
-    '1', 'sertraline', '10/07/2015', '20/08/2016'
+    '1', 'sertraline', '2015/10/07', '2016/08/20'
   );
 
   INSERT INTO evening_check (wellbeing, patient_id, date_of_check, medication_taken, survey_responses) VALUES (
-    100, '1','11/07/2017', true, 'Q1:1 Q2:2 Q3:3'
+    100, '1','2017/07/11', true, 'Q1:1 Q2:2 Q3:3'
   );
 
   INSERT INTO two_weekly_check (date_of_survey, patient_id, nine_question_survey, five_question_survey) VALUES(
-    '10/07/2016','1', '9 question', '5 question'
+    '2016/10/07','1', '9 question', '5 question'
   );
 
   COMMIT;
