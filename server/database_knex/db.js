@@ -4,4 +4,6 @@ const knex = require('knex')(config[env]);
 
 module.exports = knex;
 
-knex.migrate.latest(config[env]);
+if (process.env.NODE_ENV === 'development') {
+  knex.migrate.latest(config[env]);
+}

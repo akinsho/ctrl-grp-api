@@ -9,12 +9,23 @@ router.get('/users', (req, res, next) =>
     .catch(err => next(err))
 );
 
-router.get('/users/:firstname', (req, res, next) => {
+router.get('/users/:id', (req, res, next) => {
   queries
-    .getSingle(req.params.firstname)
+    .getSingle(req.params.id)
     .then(user => {
       res.status(200).json(user);
     })
+    .catch(err => next(err));
+});
+
+router.post('/user/new', (req, res, next) => {
+  queries
+    .addUser(req.body)
+    .then(userID => {
+      console.log('userID', userID);
+      return queries.getSingle(userID);
+    })
+    .then(user => res.status(200).json(user))
     .catch(err => next(err));
 });
 

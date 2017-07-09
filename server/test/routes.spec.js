@@ -44,16 +44,38 @@ describe('API Routes', () => {
       });
     });
   });
-  describe('GET /api/v1/users/:firstname', () => {
+  describe('GET /api/v1/users/:id', () => {
     it('should return a single user', done => {
-      chai.request(server).get('/api/v1/users/:firstname').end((err, res) => {
+      chai.request(server).get('/api/v1/users/1').end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.name.should.equal('akin');
+        res.body.firstname.should.equal('akin');
         res.body.should.have.property('surname');
         done();
       });
+    });
+  });
+  describe('POST /api/v1/user/new', () => {
+    it('should add a new user and their start date on the app', done => {
+      chai
+        .request(server)
+        .post('/api/v1/user/new')
+        .send({
+          firstname: 'john',
+          surname: 'thomas',
+          start_date: '2017/07/07'
+        })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.have.property('surname');
+          res.body.should.have.property('start_date');
+          res.body.start_date.should.equal('2017/07/07');
+          res.body.firstname.should.equal('john');
+          done();
+        });
     });
   });
 });
