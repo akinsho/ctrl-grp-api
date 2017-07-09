@@ -72,8 +72,37 @@ describe('API Routes', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('surname');
           res.body.should.have.property('start_date');
-          res.body.start_date.should.equal('2017/07/07');
           res.body.firstname.should.equal('john');
+          done();
+        });
+    });
+  });
+  describe('GET /api/v1/users/:id/medication', () => {
+    it('should allow a user to check their medication', done => {
+      chai.request(server).get('/api/v1/users/1/medication').end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('medication');
+        res.body.medication.should.equal('sertraline');
+        done();
+      });
+    });
+  });
+  describe('PUT /api/v1/users/:id/medication', () => {
+    it('should allow a user to update their medication', done => {
+      chai
+        .request(server)
+        .put('/api/v1/users/1/medication')
+        .send({
+          medication: 'aripiprazole BD'
+        })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.have.property('medication');
+          res.body.medication.should.equal('aripiprazole BD');
           done();
         });
     });

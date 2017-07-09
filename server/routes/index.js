@@ -9,20 +9,32 @@ router.get('/users', (req, res, next) =>
     .catch(err => next(err))
 );
 
-router.get('/users/:id', (req, res, next) => {
+router.get('/users/:id', ({ params: { id } }, res, next) => {
   queries
-    .getSingle(req.params.id)
-    .then(user => {
-      res.status(200).json(user);
-    })
+    .getSingleUser(id)
+    .then(user => res.status(200).json(user))
     .catch(err => next(err));
 });
 
-router.post('/user/new', (req, res, next) => {
-  console.log('req', req.body);
+router.post('/user/new', ({ body }, res, next) => {
   queries
-    .addUser(req.body)
-    .then(userID => queries.getSingle(userID))
+    .addUser(body)
+    .then(userID => queries.getSingleUser(userID))
+    .then(user => res.status(200).json(user))
+    .catch(err => next(err));
+});
+
+router.get('/users/:id/medication', ({ params: { id }, body }, res, next) => {
+  queries
+    .getSingleMed(id)
+    .then(medication => res.status(200).json(medication))
+    .catch(err => next(err));
+});
+
+router.put('/users/:id/medication', ({ params: { id }, body }, res, next) => {
+  queries
+    .updateMedication(id, body)
+    .then(() => queries.getSingleMed(id))
     .then(user => res.status(200).json(user))
     .catch(err => next(err));
 });
