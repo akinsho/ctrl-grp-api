@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import db from './db';
+import db from './database_knex/db';
 
 console.log('db', db);
 
