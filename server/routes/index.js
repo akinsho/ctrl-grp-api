@@ -19,12 +19,10 @@ router.get('/users/:id', (req, res, next) => {
 });
 
 router.post('/user/new', (req, res, next) => {
+  console.log('req', req.body);
   queries
     .addUser(req.body)
-    .then(userID => {
-      console.log('userID', userID);
-      return queries.getSingle(userID);
-    })
+    .then(userID => queries.getSingle(userID))
     .then(user => res.status(200).json(user))
     .catch(err => next(err));
 });
