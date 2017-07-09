@@ -8,18 +8,17 @@ const server = require('./../server.js');
 
 chai.use(chaiHttp);
 
-const mochaAsync = fn => async done => {
+const mochaAsync = fn => async () => {
   try {
     await fn();
-    done();
   } catch (e) {
-    done(e);
+    return e;
   }
 };
 
 describe('API Routes', () => {
   beforeEach(
-    mochaAsync(async done => {
+    mochaAsync(async () => {
       await knex.migrate.rollback();
       await knex.migrate.latest();
       const seedrun = await knex.seed.run();
@@ -28,7 +27,7 @@ describe('API Routes', () => {
   );
 
   afterEach(
-    mochaAsync(async done => {
+    mochaAsync(async () => {
       await knex.migrate.rollback();
     })
   );
