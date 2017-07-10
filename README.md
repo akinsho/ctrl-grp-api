@@ -1,14 +1,30 @@
-# ctrl-grp-api
-An NodeJS API for the ctrl-grp challenge
+
+A NodeJS API for the Ctrl-Group challenge
+===
 
 The challenge was to create an API for an exisiting project for the CTRL-GRP
 
-My approach to this challenge was to use the **knex** ORM to create a database using the `pg` client, the advantage of using an ORM
+My approach to solving this problem involved developing a schema to model the data and their interactions.
+
+
+
+I use **knex** an ORM(Object relational mapping) to create a database using the `pg/postgresql` client, the advantage of using an ORM
 for this project is that the underlying database can be swapped out for another type of relational database if needed. The queries made using
 knex are abstracted away from the specific database used. 
 
-Another advantage of an ORM is that knex handles migrations of the database so that any necessary changes can be made to the database schema
+Another advantage of an ORM is that knex handles migrations of the database so that any necessary changes can be made to the database schema. Such as for example in the [add_symptoms_migration](./server/database-knex/migrations) I update the database with a new field `symptoms` at a later date which allowed me to extend the database with no alteration/loss to the existing data.
 
-The API is a RESTFUL api i.e. requests are made to endpoints such as `api/v1/users` to get all user information or more specifically/
-more relevant to this particular application which employs a largely one way data the query `api/v1/user/:id` where id represents
+The API is a RESTFUL i.e. requests are made to endpoints such as `api/v1/users` to get all user information or more specifically/
+more relevant to this particular application which employs a largely one way data flow, the query `api/v1/user/:id` where id represents
 the particular user ID provides the specific user data
+
+## Available Queries
+* `GET /users` - provides information on all users
+* `GET /users/:id` - provides the firstname, surname, date joined fields for a given user
+* `POST /user/new` - adds a new user to the database
+* `GET /users/:id/medication` - gives information on a users medication history i.e current medication date of dose changed etc.
+* `PUT /users/:id/medication` - updates/edits information on a users medication history
+* `POST /users/:id/evening` -add a new evening check with the fields `date_of_check`, `patient_id`,
+`wellbeing`, `symptoms`, `survey responses`
+* `GET /users/:id/evening/:date` - get information for a particular evening check given a particular date.
+* `GET /users/:id/two_weekly/:date` - get information a two weekly check on a particular day.
