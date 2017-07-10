@@ -117,7 +117,8 @@ describe('API Routes', () => {
           patient_id: 1,
           date_of_check: '2012/02/22',
           medication_taken: false,
-          survey_responses: '...'
+          survey_responses: '...',
+          symptoms: 'Ive been vomiting'
         })
         .end((err, res) => {
           res.should.have.status(200);
@@ -125,6 +126,7 @@ describe('API Routes', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('wellbeing');
           res.body.wellbeing.should.equal(74);
+          res.body.symptoms.should.equal('Ive been vomiting');
           done();
         });
     });
