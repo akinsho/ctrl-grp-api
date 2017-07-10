@@ -51,6 +51,7 @@ const Form = ({
       id="wellbeing"
       placeholder="Wellbeing: choose a number from 1-100"
     />
+    <Input type="date" id="date_of_check" onChange={handleChange} />
     <Button>Submit Evening Check</Button>
   </StyledForm>
 );

@@ -45,6 +45,7 @@ class App extends Component {
     user: {},
     eveningCheck: {},
     wellbeing: '',
+    date_of_check: '',
     symptoms: '',
     survey: '',
     medication_taken: false
@@ -75,7 +76,13 @@ class App extends Component {
   };
 
   handleSubmit = event => {
-    const { wellbeing, symptoms, medication_taken, survey } = this.state;
+    const {
+      wellbeing,
+      date_of_check,
+      symptoms,
+      medication_taken,
+      survey
+    } = this.state;
     event.preventDefault();
     fetch(`${apiEndpoint}/api/v1/users/1/evening`, {
       method: 'POST',
@@ -85,7 +92,7 @@ class App extends Component {
       },
       body: JSON.stringify({
         patient_id: 1,
-        date_of_check: '2017/07/08',
+        date_of_check,
         survey_responses: survey,
         wellbeing,
         symptoms,
@@ -96,6 +103,15 @@ class App extends Component {
       .then(json => this.setState({ eveningCheck: json }));
   };
 
+  tidyDate(date) {
+    if (date) {
+      const tidied = date.split('T')[0];
+      const [first, second, third] = tidied.split('-');
+      const britishDate = [third, second, first].join('/');
+      return britishDate;
+    }
+  }
+
   render() {
     const { user, eveningCheck } = this.state;
     return (
@@ -105,7 +121,7 @@ class App extends Component {
           {user
             ? <div>
                 <p>Name: {`${user.firstname} ${user.surname}`}</p>
-                <p>Day Joined: {user.start_date}</p>
+                <p>Day Joined: {this.tidyDate(user.start_date)}</p>
                 <p>
                   {user.medicationHistory &&
                     'Medication: ' + user.medicationHistory.medication}
@@ -118,6 +134,7 @@ class App extends Component {
           <Patient>
             <p>Symptoms: {eveningCheck.symptoms}</p>
             <p>Wellbeing: {eveningCheck.wellbeing}</p>
+            <p>Date: {this.tidyDate(eveningCheck.date_of_check)}</p>
             <p>
               Medication Taken:
               {eveningCheck.medication_taken === false ? 'No' : 'Yes'}
