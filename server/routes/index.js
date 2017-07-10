@@ -51,7 +51,7 @@ router.get(
   '/users/:id/evening/:date',
   ({ params: { id, date } }, res, next) => {
     queries
-      .getEveningCheck(id, date) // TODO This checks the wrong thing as it checks using the users id as the check ID
+      .getEveningCheck(id, date)
       .then(check => res.status(200).json(check))
       .catch(err => next(err));
   }
