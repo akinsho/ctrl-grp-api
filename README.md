@@ -28,3 +28,37 @@ the particular user ID provides the specific user data
 `wellbeing`, `symptoms`, `survey responses`
 * `GET /users/:id/evening/:date` - get information for a particular evening check given a particular date.
 * `GET /users/:id/two_weekly/:date` - get information a two weekly check on a particular day.
+
+I built this API using TDD, I constructed [tests](./server/test/routes.spec.js) for each endpoint by asserting what the desired results I wanted were supposed to be and proceeded to write the routes for each test.
+
+Test
+```js
+  describe('PUT /api/v1/users/:id/medication', () => {
+    it('should allow a user to update their medication', done => {
+      chai
+        .request(server)
+        .put('/api/v1/users/1/medication')
+        .send({
+          medication: 'aripiprazole BD'
+        })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.have.property('medication');
+          res.body.medication.should.equal('aripiprazole BD');
+          done();
+        });
+    });
+  });
+```
+Route
+```js
+router.put('/users/:id/medication', ({ params: { id }, body }, res, next) => {
+  queries
+    .updateMedication(id, body)
+    .then(() => queries.getSingleMed(id))
+    .then(user => res.status(200).json(user))
+    .catch(err => next(err));
+});
+```
