@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-const flex = css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+import { Button, flex } from './Styled';
+import Form from './Form';
 
 const AppWrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
-  ${flex}
-`;
-
-const Form = styled.form`
-  width: 60%;
-  height: auto;
-  background-color: grey;
-  margin: 1em;
   ${flex}
 `;
 
@@ -29,31 +17,6 @@ const Patient = styled.div`
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
   ${flex}
   margin: 0.3em;
-`;
-
-const Button = styled.button`
-  width: 10em;
-  height: 3em;
-  border-radius: 4px;
-  border: none;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-  margin: 1em;
-`;
-
-const Input = styled.input`
-  width: 80%;
-  height: 2em;
-  font-size: 1.2em;
-  padding-left: 1em;
-  margin: 0.5em;
-  border-radius: 4px;
-  border: none;
-`;
-
-const DefaultSelect = Input.withComponent('select');
-
-const Select = DefaultSelect.extend`
-  width: 85%;
 `;
 
 class App extends Component {
@@ -136,33 +99,11 @@ class App extends Component {
               {eveningCheck.medication_taken === false ? 'No' : 'Yes'}
             </p>
           </Patient>}
-        <Form onSubmit={this.handleSubmit}>
-          <h3>Evening Check</h3>
-          Medication Taken
-          <Select onChange={this.handleChange} id="medication_taken">
-            <option>Yes</option>
-            <option>No</option>
-          </Select>
-          <Input
-            onChange={this.handleChange}
-            type="text"
-            id="symptoms"
-            placeholder="what are your symptoms"
-          />
-          <Input
-            onChange={this.handleChange}
-            type="text"
-            id="survey"
-            placeholder="Survey Questions"
-          />
-          <Input
-            onChange={this.handleChange}
-            type="text"
-            id="wellbeing"
-            placeholder="Wellbeing: choose a number from 1-100"
-          />
-          <Button>Submit Evening Check</Button>
-        </Form>
+        <Form
+          fields={this.state}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
       </AppWrapper>
     );
   }

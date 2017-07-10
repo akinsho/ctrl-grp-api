@@ -18,7 +18,6 @@ const getEveningCheck = (id, date) =>
     .first();
 
 const addEveningCheck = check => {
-  console.log('check', check);
   return EveningCheck().insert(check, 'id');
 };
 
