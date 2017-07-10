@@ -4,11 +4,17 @@ exports.seed = function(knex, Promise) {
     knex('users').del(),
     knex('medication_history').del(),
     knex('evening_check').del(),
-    knex('two_weekly_check'),
+    knex('two_weekly_check').del()
+  ).then(() =>
     // Inserts seed entries
     knex('users')
       .insert([
-        { firstname: 'akin', surname: 'sowemimo', start_date: '2015/07/20' }
+        {
+          id: 1,
+          firstname: 'akin',
+          surname: 'sowemimo',
+          start_date: '2015/07/20'
+        }
       ])
       .then(() =>
         knex('medication_history').insert({
