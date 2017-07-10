@@ -1,6 +1,7 @@
 
 A NodeJS API for the Ctrl-Group challenge
 ===
+**API Endpoint**: https://ctrl-grp-api.herokuapp.com/
 
 <img src="./demo.gif" alt="Demo of API's use" width="500px" height="400px"/>
 
@@ -8,6 +9,29 @@ The challenge was to create an API for an exisiting project for the CTRL-GRP
 
 My approach to solving this problem involved developing a schema to model the data and their interactions.
 
+## Users - 
+|  id | firstname  |  surname |  start_date |
+|---|---|---|---|
+| 1  | Akin  |  Sowemimo |  2017/07/07 |
+
+This table is core and provides user data to which all other tables relate
+
+## Medication History -
+|  patient_id | day_changed  | dosage_changed  |  medication | id  |
+|---|---|---|---|---|
+|  1 | 12/09/2016  |  null | Sertraline  |   3|
+
+This table relates to each patient on contains data on when their medication changed, when their dose changed and what their medication is.
+
+## Evening Check -
+|  patient_id 	|   id	|   	date_of_check |  wellbeing 	|  medication_taken 	| survey_responses |
+|---	          |---	  |---	              |---	        |---	                |---
+|   1	          |   3	  |       12/07/2017 	|  87 	      |   yes	              |   Q1: 2, Q2: 3, Q3: 1  |
+
+## Two Weekly Check -
+|  patient_id 	|   id	|   	date_of_survey |  9 Question survey 	|  5 Question survey 	|
+|---	          |---	  |---	              |---	        |---	                |
+|   1	          |   1	  |       18/08/2016 	|  9/10 	      |   5//5           |
 
 
 I use **knex** an ORM(Object relational mapping) to create a database using the `pg/postgresql` client, the advantage of using an ORM
