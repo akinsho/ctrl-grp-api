@@ -114,7 +114,7 @@ describe('API Routes', () => {
         .post('/api/v1/users/1/evening')
         .send({
           wellbeing: 74,
-          patient_id: 1,
+          patient_id: 15,
           date_of_check: '2012/02/22',
           medication_taken: false,
           survey_responses: '...',

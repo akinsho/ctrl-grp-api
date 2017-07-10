@@ -17,7 +17,10 @@ const getEveningCheck = (id, date) =>
     .andWhere('date_of_check', date)
     .first();
 
-const addEveningCheck = check => EveningCheck().insert(check, 'id');
+const addEveningCheck = check => {
+  console.log('check', check);
+  return EveningCheck().insert(check, 'id');
+};
 
 const getAll = () => Users().select();
 

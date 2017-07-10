@@ -24,7 +24,7 @@ const Form = styled.form`
 
 const Patient = styled.div`
   width: 60%;
-  height: 20%;
+  height: auto;
   background-color: whitesmoke;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
   ${flex}
@@ -55,6 +55,7 @@ const Select = Input.withComponent('select');
 class App extends Component {
   state = {
     user: {},
+    eveningCheck: {},
     wellbeing: '',
     symptoms: '',
     survey: '',
@@ -84,28 +85,31 @@ class App extends Component {
 
   handleSubmit = event => {
     const { wellbeing, symptoms, medication_taken, survey } = this.state;
-    console.log('this.state', this.state);
     event.preventDefault();
     fetch('http://localhost:4001/api/v1/users/15/evening', {
       method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         patient_id: 15,
         date_of_check: '2017/07/08',
         survey_responses: survey,
         wellbeing,
         symptoms,
-        medication_taken: medication_taken === 'yes' ? true : false
+        medication_taken
       })
     })
       .then(res => res.json())
-      .then(json => console.log('json', json));
+      .then(json => this.setState({ eveningCheck: json }));
   };
 
   render() {
-    const { user } = this.state;
+    const { user, eveningCheck } = this.state;
     return (
       <AppWrapper>
-        Frontend
+        <h1>CTRL-Group API Demo</h1>
         <Patient>
           {user
             ? <div>
@@ -117,7 +121,17 @@ class App extends Component {
                 </p>
               </div>
             : <p>Loading...</p>}
+          <Button onClick={this.showMedication}>Show Medication</Button>
         </Patient>
+        {eveningCheck.symptoms &&
+          <Patient>
+            <p>Symptoms: {eveningCheck.symptoms}</p>
+            <p>Wellbeing: {eveningCheck.wellbeing}</p>
+            <p>
+              Medication Taken:
+              {eveningCheck.medication_taken === false ? 'No' : 'Yes'}
+            </p>
+          </Patient>}
         <Form onSubmit={this.handleSubmit}>
           <h3>Evening Check</h3>
           Medication Taken
@@ -145,7 +159,6 @@ class App extends Component {
           />
           <Button>Submit Evening Check</Button>
         </Form>
-        <Button onClick={this.showMedication}>Show Medication</Button>
       </AppWrapper>
     );
   }
