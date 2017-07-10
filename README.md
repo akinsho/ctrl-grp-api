@@ -12,7 +12,7 @@ I use **knex** an ORM(Object relational mapping) to create a database using the 
 for this project is that the underlying database can be swapped out for another type of relational database if needed. The queries made using
 knex are abstracted away from the specific database used. 
 
-Another advantage of an ORM is that knex handles migrations of the database so that any necessary changes can be made to the database schema. Such as for example in the [add_symptoms_migration](./server/database-knex/migrations) I update the database with a new field `symptoms` at a later date which allowed me to extend the database with no alteration/loss to the existing data.
+Another advantage of an ORM is that knex handles migrations of the database so that any necessary changes can be made to the database schema. Such as for example in the [add_symptoms_migration](https://github.com/Akin909/ctrl-grp-api/blob/master/server/database_knex/migrations/20170710155524_add_symptoms_to_evening_check.js) I update the database with a new field `symptoms` at a later date which allowed me to extend the database with no alteration/loss to the existing data.
 
 The API is a RESTFUL i.e. requests are made to endpoints such as `api/v1/users` to get all user information or more specifically/
 more relevant to this particular application which employs a largely one way data flow, the query `api/v1/user/:id` where id represents
