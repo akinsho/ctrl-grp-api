@@ -9,7 +9,8 @@ module.exports = {
     client: 'pg',
     connection: {
       database: 'ctrl-grp-dev'
-    }
+    },
+    debug: true
   },
   test: {
     migrations: {
@@ -21,6 +22,17 @@ module.exports = {
     client: 'pg',
     connection: {
       database: 'ctrl-grp-test'
-    }
+    },
+    debug: true
+  },
+  production: {
+    client: 'postgresql',
+    connection: process.env.DATABASE_URL
+  },
+  migrations: {
+    tableName: 'knex_migrations'
+  },
+  seeds: {
+    directory: __dirname + '/database_knex/seeds/production'
   }
 };

@@ -7,7 +7,8 @@
   "author": "Akin Sowemimo",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./server.js --exec babel-node -e js",
+    "start": "./node_modules/.bin/babel-node server.js",
+    "local": "nodemon ./server.js --exec babel-node -e js",
     "test": "mocha",
     "test:watch": "mocha -w"
   },
