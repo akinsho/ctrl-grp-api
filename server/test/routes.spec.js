@@ -107,4 +107,39 @@ describe('API Routes', () => {
         });
     });
   });
+  describe('POST /api/v1/users/:id/evening', () => {
+    it('should allow a user to submit an evening check', done => {
+      chai
+        .request(server)
+        .post('/api/v1/users/1/evening')
+        .send({
+          wellbeing: 74,
+          patient_id: 1,
+          date_of_check: '22/02/2012',
+          medication_taken: false,
+          survey_responses: '...'
+        })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.have.property('wellbeing');
+          res.body.wellbeing.should.equal(74);
+          done();
+        });
+    });
+  });
+  describe('GET /api/v1/users/:id/evening', () => {
+    it('should allow a user to check their last evening check', done => {
+      chai.request(server).get('/api/v1/users/1/evening').end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('patient_id');
+        res.body.should.have.property('wellbeing');
+        res.body.wellbeing.should.equal(100);
+        done();
+      });
+    });
+  });
 });

@@ -39,4 +39,21 @@ router.put('/users/:id/medication', ({ params: { id }, body }, res, next) => {
     .catch(err => next(err));
 });
 
+router.post('/users/:id/evening', ({ body }, res, next) => {
+  queries
+    .addEveningCheck(body)
+    .then(id => {
+      console.log('id', id);
+      return queries.getEveningCheck(id);
+    })
+    .then(check => res.status(200).json(check))
+    .catch(err => next(err));
+});
+router.get('/users/:id/evening', ({ params: { id } }, res, next) => {
+  queries
+    .getEveningCheck(id)
+    .then(check => res.status(200).json(check))
+    .catch(err => next(err));
+});
+
 module.exports = router;
