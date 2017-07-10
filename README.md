@@ -2,7 +2,7 @@
 A NodeJS API for the Ctrl-Group challenge
 ===
 
-<img src="./demo.gif" alt="Demo of API's use" style="width: 200px; height: 400px"/>
+<img src="./demo.gif" alt="Demo of API's use" width="500px" height="400px"/>
 
 The challenge was to create an API for an exisiting project for the CTRL-GRP
 
