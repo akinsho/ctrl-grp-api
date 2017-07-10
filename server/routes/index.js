@@ -42,10 +42,11 @@ router.put('/users/:id/medication', ({ params: { id }, body }, res, next) => {
 router.post('/users/:id/evening', ({ body }, res, next) => {
   queries
     .addEveningCheck(body)
-    .then(id => queries.getEveningCheck(id))
+    .then(id => queries.getEveningCheck(id, body.date_of_check))
     .then(check => res.status(200).json(check))
     .catch(err => next(err));
 });
+
 router.get(
   '/users/:id/evening/:date',
   ({ params: { id, date } }, res, next) => {

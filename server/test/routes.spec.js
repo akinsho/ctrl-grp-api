@@ -156,6 +156,8 @@ describe('API Routes', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('five_question_survey');
           res.body.should.have.property('nine_question_survey');
+          res.body.five_question_survey.should.equal('5 question');
+          res.body.nine_question_survey.should.equal('9 question');
           done();
         });
     });
