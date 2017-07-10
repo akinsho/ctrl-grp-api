@@ -129,17 +129,20 @@ describe('API Routes', () => {
         });
     });
   });
-  describe('GET /api/v1/users/:id/evening', () => {
-    it('should allow a user to check their last evening check', done => {
-      chai.request(server).get('/api/v1/users/1/evening').end((err, res) => {
-        res.should.have.status(200);
-        res.should.be.json;
-        res.body.should.be.a('object');
-        res.body.should.have.property('patient_id');
-        res.body.should.have.property('wellbeing');
-        res.body.wellbeing.should.equal(100);
-        done();
-      });
+  describe('GET /api/v1/users/:id/evening/:date', () => {
+    it('should allow a user to check their evening check for a particular day', done => {
+      chai
+        .request(server)
+        .get('/api/v1/users/1/evening/2017-07-11')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.have.property('patient_id');
+          res.body.should.have.property('wellbeing');
+          res.body.wellbeing.should.equal(100);
+          done();
+        });
     });
   });
   describe('GET /api/v1/users/:id/two_weekly/:date', () => {

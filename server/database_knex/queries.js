@@ -11,9 +11,14 @@ const EveningCheck = () => knex('evening_check');
 const getSingleMed = id =>
   MedicationHistory().where('patient_id', parseInt(id)).first();
 
-const getEveningCheck = id => EveningCheck().where('id', parseInt(id)).first();
+const getEveningCheck = (id, date) =>
+  EveningCheck()
+    .where('id', parseInt(id))
+    .andWhere('date_of_check', date)
+    .first();
 
 const addEveningCheck = check => EveningCheck().insert(check, 'id');
+
 const getAll = () => Users().select();
 
 const TwoWeeklyCheck = () => knex('two_weekly_check');
