@@ -24,7 +24,8 @@ exports.seed = function(knex, Promise) {
           patient_id: 1,
           date_of_check: '2017/07/11',
           medication_taken: true,
-          survey_responses: 'Q1:1 Q2:2 Q3:3'
+          survey_responses: 'Q1:1 Q2:2 Q3:3',
+          symptoms: 'diarrhoea'
         })
       )
       .then(() =>
