@@ -10,7 +10,7 @@ const flex = css`
 
 const AppWrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   ${flex}
 `;
 
@@ -50,7 +50,11 @@ const Input = styled.input`
   border: none;
 `;
 
-const Select = Input.withComponent('select');
+const DefaultSelect = Input.withComponent('select');
+
+const Select = DefaultSelect.extend`
+  width: 85%;
+`;
 
 class App extends Component {
   state = {
@@ -155,7 +159,7 @@ class App extends Component {
             onChange={this.handleChange}
             type="text"
             id="wellbeing"
-            placeholder="How are you feeling choose a number from 1-100"
+            placeholder="Wellbeing: choose a number from 1-100"
           />
           <Button>Submit Evening Check</Button>
         </Form>
