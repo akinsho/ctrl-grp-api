@@ -42,10 +42,7 @@ router.put('/users/:id/medication', ({ params: { id }, body }, res, next) => {
 router.post('/users/:id/evening', ({ body }, res, next) => {
   queries
     .addEveningCheck(body)
-    .then(id => {
-      console.log('id', id);
-      return queries.getEveningCheck(id);
-    })
+    .then(id => queries.getEveningCheck(id))
     .then(check => res.status(200).json(check))
     .catch(err => next(err));
 });

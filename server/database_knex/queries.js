@@ -11,16 +11,11 @@ const EveningCheck = () => knex('evening_check');
 const getSingleMed = id =>
   MedicationHistory().where('patient_id', parseInt(id)).first();
 
-const getEveningCheck = id =>
-  EveningCheck().where('patient_id', parseInt(id)).first();
+const getEveningCheck = id => EveningCheck().where('id', parseInt(id)).first();
 
 const addEveningCheck = check => {
   //TODO function beneath this not return in id
-  try {
-    return EveningCheck().insert(check, 'id');
-  } catch (e) {
-    return e;
-  }
+  return EveningCheck().insert(check, 'id').catch(err => err);
 };
 
 const getAll = () => Users().select();

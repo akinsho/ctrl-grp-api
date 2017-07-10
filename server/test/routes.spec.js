@@ -115,7 +115,7 @@ describe('API Routes', () => {
         .send({
           wellbeing: 74,
           patient_id: 1,
-          date_of_check: '22/02/2012',
+          date_of_check: '2012/02/22',
           medication_taken: false,
           survey_responses: '...'
         })
