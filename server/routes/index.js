@@ -48,9 +48,19 @@ router.post('/users/:id/evening', ({ body }, res, next) => {
 });
 router.get('/users/:id/evening', ({ params: { id } }, res, next) => {
   queries
-    .getEveningCheck(id)
+    .getEveningCheck(id) // TODO This checks the wrong thing as it checks using the users id as the check ID
     .then(check => res.status(200).json(check))
     .catch(err => next(err));
 });
+
+router.get(
+  '/users/:id/two_weekly/:date',
+  ({ params: { id, date } }, res, next) => {
+    queries
+      .getTwoWeeklyCheck(id, date)
+      .then(check => res.status(200).json(check))
+      .catch(err => next(err));
+  }
+);
 
 module.exports = router;

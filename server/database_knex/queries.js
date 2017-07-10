@@ -13,13 +13,16 @@ const getSingleMed = id =>
 
 const getEveningCheck = id => EveningCheck().where('id', parseInt(id)).first();
 
-const addEveningCheck = check => {
-  //TODO function beneath this not return in id
-  return EveningCheck().insert(check, 'id').catch(err => err);
-};
-
+const addEveningCheck = check => EveningCheck().insert(check, 'id');
 const getAll = () => Users().select();
 
+const TwoWeeklyCheck = () => knex('two_weekly_check');
+
+const getTwoWeeklyCheck = (id, date) =>
+  TwoWeeklyCheck()
+    .where('date_of_survey', date)
+    .andWhere('patient_id', parseInt(id))
+    .first();
 //Ideally a users details will be retrieved by comparing a hashed password to
 //the submitted password i.e. using something like bcrypt
 const getSingleUser = userID => Users().where('id', parseInt(userID)).first();
@@ -37,5 +40,6 @@ module.exports = {
   addUser,
   updateMedication,
   addEveningCheck,
-  getEveningCheck
+  getEveningCheck,
+  getTwoWeeklyCheck
 };

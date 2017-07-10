@@ -142,4 +142,19 @@ describe('API Routes', () => {
       });
     });
   });
+  describe('GET /api/v1/users/:id/two_weekly/:date', () => {
+    it('should allow a user to see their two weekly check for a given day', done => {
+      chai
+        .request(server)
+        .get('/api/v1/users/1/two_weekly/2016-10-07')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.have.property('five_question_survey');
+          res.body.should.have.property('nine_question_survey');
+          done();
+        });
+    });
+  });
 });
