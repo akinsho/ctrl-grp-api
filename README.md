@@ -1,6 +1,14 @@
 
 A NodeJS API for the Ctrl-Group challenge
 ===
+
+## Run Locally
+* `git clone` the repository.
+* `cd` into server run `npm install`.
+ * run `npm run local` (Make sure you have `nodemon` if not `npm i -S nodemon`).
+ * `curl http://localhost4001/api/v1/users` this should return a JSON object with user details.
+ * run `npm test` to execute the test suite.
+
 **API Endpoint**: https://ctrl-grp-api.herokuapp.com/
 
 <img src="./demo.gif" alt="Demo of API's use" width="500px" height="400px"/>
