@@ -96,3 +96,6 @@ router.put('/users/:id/medication', ({ params: { id }, body }, res, next) => {
     .catch(err => next(err));
 });
 ```
+## Issues
+My current DB schema involves taking the data relating to each survey as a string with all the responses which
+would then have to be parsed on the front or backend however if specific answers were needed. A potential solution would involve another table for all survey results however that would add a further level of complexity regarding accessing this information.
