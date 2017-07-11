@@ -5,7 +5,7 @@ const queries = require('./../database_knex/queries');
 router.get('/users', (req, res, next) =>
   queries
     .getAll()
-    .then(shows => res.status(200).json(shows))
+    .then(users => res.status(200).json(users))
     .catch(err => next(err))
 );
 
