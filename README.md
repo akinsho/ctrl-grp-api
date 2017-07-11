@@ -2,10 +2,44 @@
 A NodeJS API for the Ctrl-Group challenge
 ===
 
+## Run Locally
+* `git clone` the repository.
+* `cd` into server run `npm install`.
+ * run `npm run local` (Make sure you have `nodemon` if not `npm i -S nodemon`).
+ * `curl http://localhost4001/api/v1/users` this should return a JSON object with user details.
+ * run `npm test` to execute the test suite.
+
+**API Endpoint**: https://ctrl-grp-api.herokuapp.com/
+
+<img src="./demo.gif" alt="Demo of API's use" width="500px" height="400px"/>
+
 The challenge was to create an API for an exisiting project for the CTRL-GRP
 
 My approach to solving this problem involved developing a schema to model the data and their interactions.
 
+## Users - 
+|  id | firstname  |  surname |  start_date |
+|---|---|---|---|
+| 1  | Akin  |  Sowemimo |  2017/07/07 |
+
+This table is core and provides user data to which all other tables relate
+
+## Medication History -
+|  patient_id | day_changed  | dosage_changed  |  medication | id  |
+|---|---|---|---|---|
+|  1 | 12/09/2016  |  null | Sertraline  |   3|
+
+This table relates to each patient on contains data on when their medication changed, when their dose changed and what their medication is.
+
+## Evening Check -
+|  patient_id 	|   id	|   	date_of_check |  wellbeing 	|  medication_taken 	| survey_responses |
+|---	          |---	  |---	              |---	        |---	                |---
+|   1	          |   3	  |       12/07/2017 	|  87 	      |   yes	              |   Q1: 2, Q2: 3, Q3: 1  |
+
+## Two Weekly Check -
+|  patient_id 	|   id	|   	date_of_survey |  9 Question survey 	|  5 Question survey 	|
+|---	          |---	  |---	              |---	        |---	                |
+|   1	          |   1	  |       18/08/2016 	|  9/10 	      |   5//5           |
 
 
 I use **knex** an ORM(Object relational mapping) to create a database using the `pg/postgresql` client, the advantage of using an ORM
@@ -62,3 +96,6 @@ router.put('/users/:id/medication', ({ params: { id }, body }, res, next) => {
     .catch(err => next(err));
 });
 ```
+## Issues
+My current DB schema involves taking the data relating to each survey as a string with all the responses which
+would then have to be parsed on the front or backend however if specific answers were needed. A potential solution would involve another table for all survey results however that would add a further level of complexity regarding accessing this information.
